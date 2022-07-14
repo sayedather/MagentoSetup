@@ -1,4 +1,4 @@
-# Magento 2 Installation Steps:
+# Magento 2 Installation Guide:
 
 ## Introduction
 Magento is one of the most popular open-source e-commerce platform written in PHP powered by Zend framework. In this tutorial, you will learn the steps required to install and setup Magento on your Linux/Ubuntu server.
