@@ -1,12 +1,13 @@
-# Magento 2 Installation Guide:
+# Magento 2 (version 2.4.4) Installation Guide:
 
 ## Introduction
-Magento is one of the most popular open-source e-commerce platform written in PHP powered by Zend framework. In this tutorial, you will learn the steps required to install and setup Magento on your Linux/Ubuntu server.
+Magento is one of the most popular open-source e-commerce platform written in PHP powered by Zend framework. In this tutorial, you will learn the steps required to install and setup Magento v2.4.4 on your Linux/Ubuntu (ubuntu 20.04 & ubuntu 22.04) server.
 
 ## Prerequisites
+- Ubuntu 20.04 or 22.04
 - PHP 8.1+
 - MySQL 8.0+
-- Apache
+- Apache2
 - Composer 2
 - Elastic Search 7.x
 
