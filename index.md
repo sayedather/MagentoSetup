@@ -131,3 +131,64 @@ sudo systemctl enable elasticsearch
  ```
  curl -X GET 'http://localhost:9200'
  ```
+
+### Step 10: Installing Magento using composer:
+Change to our web directory
+```
+cd /var/www/html
+```
+Run the composer command to install Magento
+```
+composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition magento
+```
+You will be prompted to provide a username password for this. Put your public key as the username and the private key as the password. It will take some time for the Composer to download and install all the required dependencies so **be patient.**  
+  
+Once the download is done, its time to change to magento directory and continue with the Installation:  
+```
+cd magento/
+```
+Run the Following Command (Make sure to change the username, password and database name from _**Step 6**_
+```
+php bin/magento setup:install --base-url=http://localhost --db-host=localhost --db-name=magento --db-user=magento --db-password=magento123 --admin-firstname=First --admin-lastname=Last --admin-email=test@example.com --admin-user=admin --admin-password=admin123 --language=en_US --currency=USD --timezone=America/Chicago --use-rewrites=1 --backend-frontname=admin
+```
+### Step 11: Setup Cron jobs:
+Cronjob is nothing but a scheduler that runs a specified file path at a specified interval. Magento needs some of these Cron Jobs to be set up in order to function properly.  
+  
+To add these Crons follow this command  
+Change to magento Directory
+```
+cd /var/www/html/magento
+```
+Install the Cron:
+```
+sudo php bin/magento cron:install
+```
+You can check the installed Magento Cron Jobs by using this command
+```
+sudo crontab -l
+```
+You should find theses settings in your Cron
+>* * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run 2>&1 | grep -v "Ran jobs by schedule" >> /var/www/html/magento/var/log/magento.cron.log  * * * * * /usr/bin/php /var/www/html/magento/update/cron.php >> /var/www/html/magento/var/log/update.cron.log  * * * * * /usr/bin/php /var/www/html/magento/bin/magento setup:cron:run >> /var/www/html/magento/var/log/setup.cron.log
+
+
+
+## Common Errors & Exceptions
+If you are getting 500 error after the installation please follow these steps:
+
+This problem is probably due to directory access problems. To solve that use the following commands:
+```
+sudo chown -R www-data:www-data /var/www/html/magento
+sudo chmod -R 755/var/www/html/magento
+```
+If you have problems logging into the admin panel, disable the 2FA Module (not used for localhost installations)  
+```
+sudo bin/magento module:disable Magento_TwoFactorAuth
+```
+If you are still getting errors you can debug those errors by referring the following logs
+```
+tail -f /var/log/apache2/magento_error.log $ tail -f /var/log/apache2/magento_access.log
+```
+And with this, your Magento setup is up and ready to be used for your E-Commerce site.
+
+## Conclusion
+By following the above-mentioned steps you are now ready to create your e-commerce platform with a working Magento installation. In case you have encountered something, which is not covered as a part of this tutorial, then please feel free to contact me at ather90@gmail.com
