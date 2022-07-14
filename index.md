@@ -67,9 +67,10 @@ sudo apt-get install php-common php-cli php-curl php-intl php-zip -y
 ### Step 5: Installing PHP Dependencies:
 ```
 sudo apt-get install php8.1-curl php8.1-opcache php8.1-pdo php8.1-calendar php8.1-ctype php8.1-dom php8.1-exif php8.1-ffi php8.1-fileinfo php8.1-ftp php8.1-gettext php8.1-iconv php8.1-mbstring php8.1-phar php8.1-posix php8.1-readline php8.1-shmop php8.1-simplexml php8.1-sockets php8.1-sysvmsg php8.1-sysvsem php8.1-sysvshm php8.1-tokenizer php8.1-xmlreader php8.1-xmlwriter php8.1-xsl php8.1-soap php8.1-bcmath php8.1-intl php8.1-gd php8.1-mysql php8.1-zip
-
+```
+Restart Apache to reflect the new changes:
+```
 sudo systemctl restart apache2
-
 ```
 
 ### Step 6:  Setting up MySQL Server
@@ -104,5 +105,29 @@ If you haven't registered yet you can register [here](https://account.magento.co
  - Click on [Access Keys]
  - Click on [Create A New Access Key]
 
-
-
+### Step 9: Install Elastic Search:
+```
+sudo apt install curl
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+sudo apt update
+sudo apt install elasticsearch
+```
+Now we need to change the Elastic Search Configuration file to listen to localhost connections
+```
+sudo nano /etc/elasticsearch/elasticsearch.yml
+```
+Uncomment this line ``#network.host: 192.168.0.1`` and change it to ``network.host: localhost``  
+  
+Next we start Elastic Search by
+```
+sudo systemctl start elasticsearch
+```
+and then we enable start on boot
+```
+sudo systemctl enable elasticsearch 
+```
+ To test Elastic Search Installation, run this code:  
+ ```
+ curl -X GET 'http://localhost:9200'
+ ```
