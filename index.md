@@ -168,10 +168,10 @@ You can check the installed Magento Cron Jobs by using this command
 sudo crontab -l
 ```
 You should find theses settings in your Cron
->* * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run 2>&1 | grep -v "Ran jobs by schedule" >> /var/www/html/magento/var/log/magento.cron.log  * * * * * /usr/bin/php /var/www/html/magento/update/cron.php >> /var/www/html/magento/var/log/update.cron.log  * * * * * /usr/bin/php /var/www/html/magento/bin/magento setup:cron:run >> /var/www/html/magento/var/log/setup.cron.log
-
-
-
+```
+* * * * * /usr/bin/php /var/www/html/magento/bin/magento cron:run 2>&1 | grep -v "Ran jobs by schedule" >> /var/www/html/magento/var/log/magento.cron.log  * * * * * /usr/bin/php /var/www/html/magento/update/cron.php >> /var/www/html/magento/var/log/update.cron.log  * * * * * /usr/bin/php /var/www/html/magento/bin/magento setup:cron:run >> /var/www/html/magento/var/log/setup.cron.log
+```
+  
 ## Common Errors & Exceptions
 If you are getting 500 error after the installation please follow these steps:
 
