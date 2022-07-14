@@ -180,7 +180,7 @@ This problem is probably due to directory access problems. To solve that use the
 sudo chown -R www-data:www-data /var/www/html/magento
 sudo chmod -R 755/var/www/html/magento
 ```
-If you have problems logging into the admin panel, disable the 2FA Module (not used for localhost installations)  
+If you have problems logging into the admin panel, disable the 2FA Module (not needed for localhost installations)  
 ```
 sudo bin/magento module:disable Magento_TwoFactorAuth
 ```
